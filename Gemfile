@@ -4,12 +4,17 @@ source 'https://rubygems.org'
 
 gem 'google-protobuf'
 gem 'nokogiri'
+gem 'rackup'
 gem 'sinatra'
 gem 'sinatra-contrib'
 
 group :development do
-  gem 'pry'
-  gem 'pry-byebug'
+  gem 'debug'
   gem 'rubocop', '~> 1.59', require: false
   gem 'ruby-lsp', require: false
+end
+
+group :test do
+  gem 'rack-test', '~> 2.1'
+  gem 'rspec'
 end
