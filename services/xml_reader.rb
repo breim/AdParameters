@@ -2,6 +2,7 @@
 
 require 'nokogiri'
 require 'open-uri'
+require './lib/currency_converter'
 
 class XMLReader
   def initialize(xml_path)
@@ -14,10 +15,26 @@ class XMLReader
   end
 
   def extract_creatives
-    @doc.xpath('//Creative')
+    @doc.xpath('//Creative').map do |creative|
+      {
+        id: creative['id'],
+        price: convert_to_eur(creative['price'], creative['currency'])
+      }
+    end
   end
 
-  def extract_placements
-    @doc.xpath('//Placement')
+  def self.extract_placements
+    @doc.xpath('//Placement').map do |placement|
+      {
+        id: placement['id'],
+        floor_price: convert_to_eur(placement['floor'], placement['currency'])
+      }
+    end
+  end
+
+  private
+
+  def convert_to_eur(price, currency)
+    CurrencyConverter.convert_to_eur(price, currency)
   end
 end
