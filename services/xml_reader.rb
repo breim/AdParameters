@@ -2,7 +2,7 @@
 
 require 'nokogiri'
 require 'open-uri'
-require './lib/currency_converter'
+require_relative 'currency_converter'
 
 class XMLReader
   def initialize(xml_path)
@@ -23,7 +23,7 @@ class XMLReader
     end
   end
 
-  def self.extract_placements
+  def extract_placements
     @doc.xpath('//Placement').map do |placement|
       {
         id: placement['id'],
