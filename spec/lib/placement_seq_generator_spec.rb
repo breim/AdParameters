@@ -2,7 +2,7 @@
 
 RSpec.describe PlacementSeqGenerator do
   describe '.call' do
-    let(:xml_path) { 'spec/fixtures/creatives_and_placements.xml' } # Ajuste o caminho conforme necessário
+    let(:xml_path) { 'spec/fixtures/creatives_and_placements.xml' }
 
     it 'generates a hex encoded message from XML input' do
       hex_encoded_message = described_class.call(xml_path)
