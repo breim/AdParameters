@@ -6,13 +6,14 @@ In developing the code, I aimed to prioritize readability and simplicity to ensu
 
 
 ## Technologies used
-
+```
 ruby 3.2.2
 sinatra
 google-protobuf
 rubocop
 ruby-lsp
 rspec
+```
 
 ## Generating Output
 
