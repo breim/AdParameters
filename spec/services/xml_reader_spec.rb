@@ -1,37 +1,30 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+RSpec.describe XMLReader do
+  let(:xml_path) { 'spec/fixtures/creatives_and_placements.xml' }
+  subject(:xml_reader) { described_class.new(xml_path) }
 
-RSpec.describe CurrencyConverter do
-  describe '.convert_to_eur' do
-    context 'when converting from USD to EUR' do
-      it 'converts correctly' do
-        expect(CurrencyConverter.convert_to_eur(113, 'USD')).to eq(100.0)
-      end
+  before do
+    allow(CurrencyConverter).to receive(:convert_to_eur).and_return(10.0)
+  end
+
+  describe '#read_xml' do
+    it 'reads and parses the XML file' do
+      expect { xml_reader.read_xml }.not_to raise_error
     end
+  end
 
-    context 'when converting from TYR to EUR' do
-      it 'converts correctly' do
-        expect(CurrencyConverter.convert_to_eur(3.31, 'TYR')).to eq(1.0)
-      end
+  describe '#extract_creatives' do
+    it 'extracts creatives from XML' do
+      xml_reader.read_xml
+      expect(xml_reader.extract_creatives).to all(include(:id, :price))
     end
+  end
 
-    context 'when converting from SEK to EUR' do
-      it 'converts correctly' do
-        expect(CurrencyConverter.convert_to_eur(11.32, 'SEK')).to eq(1.0)
-      end
-    end
-
-    context 'when converting from an unsupported currency' do
-      it 'treats the rate as 1.0' do
-        expect(CurrencyConverter.convert_to_eur(100, 'XYZ')).to eq(100.0)
-      end
-    end
-
-    context 'when converting with non-numeric amount' do
-      it 'converts the amount to float before conversion' do
-        expect(CurrencyConverter.convert_to_eur('100', 'USD')).to eq(88.4956)
-      end
+  describe '#extract_placements' do
+    it 'extracts placements from XML' do
+      xml_reader.read_xml
+      expect(xml_reader.extract_placements).to all(include(:id, :floor_price))
     end
   end
 end
