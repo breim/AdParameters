@@ -41,7 +41,7 @@ docker run -p 9292:9292 add_parameters_app
 Access the application at 
 `http://localhost:9292/search?plc-2&price=1.3456`
 
-The return of this endpoint in json would be:
+The return of this endpoint in json should be:
 
 ```json
 {
