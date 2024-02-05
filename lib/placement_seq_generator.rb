@@ -36,7 +36,7 @@ class PlacementSeqGenerator
 
     placement_seq = FYBER::Userconfiguration::PlacementSeq.new(placement: placements_sequence)
 
-    encoded_message = FYBER::Userconfiguration::PlacementSeq.encode(placement_seq)
-    encoded_message.unpack1('H*')
+    FYBER::Userconfiguration::PlacementSeq.encode(placement_seq)
+    # encoded_message.unpack1('H*')
   end
 end
