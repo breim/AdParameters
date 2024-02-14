@@ -3,6 +3,9 @@
 require_relative '../lib/placement_seq_generator'
 require_relative '../app'
 
+require 'simplecov'
+SimpleCov.start
+
 Dir[File.join(File.dirname(__FILE__), '../services/**/*.rb')].sort.each do |file|
   require file
 end
