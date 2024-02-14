@@ -19,7 +19,7 @@ RSpec.describe CurrencyConverter do
     end
 
     it 'handles conversion for unsupported currencies as EUR' do
-      expect(CurrencyConverter.convert_to_eur(100, 'ABC')).to eq(100.0)
+      expect { CurrencyConverter.convert_to_eur(100, 'ABC') }.to raise_error('Currency not supported: ABC')
     end
 
     it 'converts with floating point amount correctly' do

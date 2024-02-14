@@ -11,7 +11,9 @@ module CurrencyConverter
   }.freeze
 
   def convert_to_eur(amount, currency)
-    rate = EXCHANGE_RATES.fetch(currency, 1.0)
+    rate = EXCHANGE_RATES.fetch(currency)
     (amount.to_f / rate).round(4)
+  rescue KeyError
+    raise "Currency not supported: #{currency}"
   end
 end
