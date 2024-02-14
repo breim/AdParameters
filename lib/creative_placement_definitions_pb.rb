@@ -15,6 +15,7 @@ begin
   pool.add_serialized_file(descriptor_data)
 rescue TypeError
   # Compatibility code: will be removed in the next major version.
+  # :nocov:
   require 'google/protobuf/descriptor_pb'
   parsed = Google::Protobuf::FileDescriptorProto.decode(descriptor_data)
   parsed.clear_dependency
@@ -28,6 +29,7 @@ rescue TypeError
   end
   warn 'Each proto file must use a consistent fully-qualified name.'
   warn 'This will become an error in the next major version.'
+  # :nocov:
 end
 
 module FYBER
